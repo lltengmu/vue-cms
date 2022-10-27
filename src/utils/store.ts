@@ -1,7 +1,7 @@
 
 interface IData{
-    expire?:number;
     data:any
+    expire?:number;
 }
 export default {
     set(key:string,data:any,expire?:number):void{
@@ -11,7 +11,7 @@ export default {
         }
         localStorage.setItem(key,JSON.stringify(cache))
     },
-    get(key:string):any | null {
+    get(key:string):string | null {
         const cacheStore = localStorage.getItem(key);
         if(cacheStore){
             const cache = JSON.parse(cacheStore)

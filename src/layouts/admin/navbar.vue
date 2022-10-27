@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import user from '@/store/user';
+import user from '@/store/userStore';
 import utils from '@/utils';
 const userStore = user()
 </script>

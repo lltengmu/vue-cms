@@ -1,6 +1,5 @@
 import userApi,{ User } from "@/api/userApi";
 import { defineStore } from "pinia";
-import user from "../../Mock/user";
 
 export default defineStore('user',{
     state:() => {

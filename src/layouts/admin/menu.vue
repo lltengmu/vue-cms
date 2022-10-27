@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { routers } from '@/store/router'
+import { routers } from '@/store/menuStore'
 import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router';
  
 const routerStore = routers()
