@@ -13,12 +13,12 @@
                     <span class="text-xs text-gray-600 ml-2">网站首页</span>
                 </div>
                 <div class="flex items-center cursor-pointer border-b py-3">
-                    <a class="fas fa-ad"></a>
+                    <a class="fas fa-house-user"></a>
                     <span class="text-xs text-gray-600 ml-2">网站首页</span>
                 </div>
-                <div class="flex items-center cursor-pointer py-3">
-                    <a class="fas fa-ad"></a>
-                    <span class="text-xs text-gray-600 ml-2">会员中心</span>
+                <div class="flex items-center cursor-pointer py-3" @click="utils.user.logout()">
+                    <a class="fas fa-sign-out-alt"></a>
+                    <span class="text-xs text-gray-600 ml-2">退出登录</span>
                 </div>
             </section>
         </div>
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import user from '@/store/user';
-
+import utils from '@/utils';
 const userStore = user()
 </script>
 

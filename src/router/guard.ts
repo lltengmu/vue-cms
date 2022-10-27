@@ -1,4 +1,4 @@
-import { store } from '@/utils';
+import utils from '@/utils';
 import userStore from '@/store/user';
 import { RouteLocationNormalized, Router } from 'vue-router'
 class Guard {
@@ -18,7 +18,7 @@ class Guard {
     }
 
     private token():string | null {
-        return store.get('token')?.token
+        return utils.store.get('token')?.token
     }
     //游客访问
     private isGuest(route: RouteLocationNormalized) {

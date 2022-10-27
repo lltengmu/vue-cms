@@ -5,6 +5,10 @@ export interface User {
     age: number
     avatar: string
 }
+export interface ILoginData {
+    account:string,
+    password:string
+}
 interface LoginInterface {
     token:string
 }
@@ -14,7 +18,7 @@ class userApi {
             url: `/user/info`
         })
     }
-    public login(data:any) {
+    public login(data:ILoginData) {
         return http.request<LoginInterface>({
             url: `/login`,
             method: 'post',

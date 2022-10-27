@@ -34,18 +34,13 @@ import { reactive } from 'vue';
 import v from '@/plugins/validate'
 import { validate } from 'vee-validate';
 import userApi from '@/api/userApi';
-import { store } from '@/utils';
+import utils from '@/utils';
 import { useRouter } from 'vue-router';
+import { cacheEnum } from '@/enum/cacheEnum';
 //引入验证类库
 const { Form, Field, ErrorMessage } = v
 const router = useRouter()
 
-//使用yup 与 validate组件 自定义验证规则
-//const schema = v.yup.object({
-//    //对account字段进行自定义验证
-//    account:v.yup.string().required("账号是必填项").email("邮箱格式不正确").label("账号"),
-//    password:v.yup.string().required("密码是必填项").min(3).label("密码")
-//})
 
 //或者使用vee-validate组件的验证规则
 const schema = {
@@ -55,15 +50,7 @@ const schema = {
 
 //定义表单提交事件处理函数
 const onSubmit = async (values: any) => {
-    //发送登录请求
-    const { resoult: { token } } = await userApi.login(values)
-    //存储token
-    store.set('token', {
-        token
-    })
-    //页面跳转
-    router.push({name:'home'})
-
+    utils.user.login(values)
 }
 </script>
 <script lang="ts">
