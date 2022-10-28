@@ -17,7 +17,7 @@
                         <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': menu.isClick }"></i>
                     </section>
                 </dt>
-                <dd v-show="menu.isClick" :class="{ active: menu.isClick }" v-for="(cmenu, key) of menu.children" :key="key" @click="handle(menu,cmenu)">
+                <dd v-show="menu.isClick" :class="{ active: cmenu.isClick }" v-for="(cmenu, key) of menu.children" :key="key" @click="handle(menu,cmenu)">
                     {{ cmenu.title }}
                 </dd>
             </dl>
@@ -33,26 +33,24 @@ import { IMenu } from '#/menu';
 const menuObject = menuStore()
 //const routerStore = routers()
 //获取当前路由实例
-//const routerService = useRouter()
+const routerService = useRouter()
 
-//const reset = () => {
-//    routerStore.routes.forEach(route => {
-//        route.meta.isClick = false;
-//        route.children?.forEach(route => {
-//            if (route.meta) {
-//                route.meta.isClick = false
-//            }
-//        })
-//    });
-//}
+const reset = () => {
+    menuObject.menus.forEach(menu => {
+        menu.isClick = false;
+        menu.children?.forEach(cmenu => {
+            cmenu.isClick = false
+        })
+    });
+}
 //按钮路由跳转使用的是编程式路由跳转
 const handle = (pmenu: IMenu, cmenu?: IMenu) => {
-    //reset();
+    reset();
     pmenu.isClick = true;
-//    if (cmenu && cmenu.meta) {
-//        cmenu.meta.isClick = true
-//        routerService.push(cmenu)
-//    }
+    if (cmenu) {
+        cmenu.isClick = true
+        routerService.push({ name: cmenu.route })
+    }
 }
 </script>
 

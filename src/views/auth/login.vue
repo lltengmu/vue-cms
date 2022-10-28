@@ -36,7 +36,7 @@ import { validate } from 'vee-validate';
 import userApi from '@/api/userApi';
 import utils from '@/utils';
 import { useRouter } from 'vue-router';
-import { cacheEnum } from '@/enum/cacheEnum';
+import { CacheEnum } from '@/enum/cacheEnum';
 //引入验证类库
 const { Form, Field, ErrorMessage } = v
 const router = useRouter()

@@ -1,7 +1,8 @@
 import utils from '@/utils';
 import userStore from '@/store/userStore';
 import { RouteLocationNormalized, Router } from 'vue-router'
-import { cacheEnum } from '@/enum/cacheEnum';
+import { CacheEnum } from '@/enum/cacheEnum';
+import menuStore from '@/store/menuStore';
 class Guard {
     constructor(private router: Router) { }
     public run() {
@@ -19,7 +20,7 @@ class Guard {
     }
 
     private token():string | null {
-        return utils.store.get(cacheEnum.TOKEN_NAME)
+        return utils.store.get(CacheEnum.TOKEN_NAME)
     }
     //游客访问
     private isGuest(route: RouteLocationNormalized) {
@@ -34,7 +35,7 @@ class Guard {
         
         if(state === false){
             //用户未登录的情况下访问了一个需要登录才可以访问的页面，则将他的目标地址缓存到本地，登录后直接重定向到目标路由
-            utils.store.set(cacheEnum.REDIRECT_ROUTE_NAME,route.name)
+            utils.store.set(CacheEnum.REDIRECT_ROUTE_NAME,route.name)
         }
         return state;
     }

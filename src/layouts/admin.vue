@@ -5,7 +5,11 @@
             <navbar />
             <Historylink />
             <div class="m-5">
-                <router-view />
+                <router-view #default="{ Component }">
+                    <Transition appear enter-active-class="animate__animated animate__bounceInRight">
+                        <component :is="Component" />
+                    </Transition>
+                </router-view>
             </div>
         </div>
     </div>
@@ -16,11 +20,17 @@ import MenuComponent from './admin/menu.vue'
 import Navbar from './admin/navbar.vue'
 import Historylink from './admin/historylink.vue';
 import menuStore from '@/store/menuStore';
-menuStore().init()
+import { onBeforeRouteUpdate, useRoute } from 'vue-router';
+const menu = menuStore()
+const route = useRoute()
+menu.init();
+onBeforeRouteUpdate(() => {
+    menu.addHistoryMenu(route)//记录历史路由
+})
 </script>
 
 <style lang="scss" scoped>
- 
+
 </style> 
 
 
