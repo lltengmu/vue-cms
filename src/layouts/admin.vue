@@ -15,6 +15,8 @@
 import MenuComponent from './admin/menu.vue'
 import Navbar from './admin/navbar.vue'
 import Historylink from './admin/historylink.vue';
+import menuStore from '@/store/menuStore';
+menuStore().init()
 </script>
 
 <style lang="scss" scoped>

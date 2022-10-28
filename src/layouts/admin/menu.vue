@@ -1,3 +1,4 @@
+
 <template>
     <div class="menu w-[200px] bg-gray-800 p-4">
         <div class="logo text-gray-300 flex items-center">
@@ -6,18 +7,18 @@
         </div>
         <!-- 菜单 -->
         <div class="left-container">
-            <dl v-for="(route, index) of routerStore.routes" :key="index">
-                <dt @click="handle(route)">
+            <dl v-for="(menu, index) of menuObject.menus" :key="index">
+                <dt @click="handle(menu)">
                     <section class="flex items-center">
-                        <i :class="route.meta.icon" class="mr-2 text-lg"></i>
-                        <span class="text-md">{{ route.meta.title }}</span>
+                        <i :class="menu.icon" class="mr-2 text-lg"></i>
+                        <span class="text-md">{{ menu.title }}</span>
                     </section>
                     <section>
-                        <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': route.meta.isClick }"></i>
+                        <i class="fas fa-angle-down duration-300" :class="{ 'rotate-180': menu.isClick }"></i>
                     </section>
                 </dt>
-                <dd v-show="route.meta.isClick" :class="{ active: childRoute.meta?.isClick }" v-for="(childRoute, key) of route.children" :key="key" @click="handle(route,childRoute)">
-                    {{ childRoute.meta?.title }}
+                <dd v-show="menu.isClick" :class="{ active: menu.isClick }" v-for="(cmenu, key) of menu.children" :key="key" @click="handle(menu,cmenu)">
+                    {{ cmenu.title }}
                 </dd>
             </dl>
         </div>
@@ -25,34 +26,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { routers } from '@/store/menuStore'
-import { RouteRecordNormalized, RouteRecordRaw, useRouter } from 'vue-router';
+import menuStore from '@/store/menuStore'
+import { useRouter } from 'vue-router';
+import { IMenu } from '#/menu';
  
-const routerStore = routers()
+const menuObject = menuStore()
+//const routerStore = routers()
 //获取当前路由实例
-const routerService = useRouter()
+//const routerService = useRouter()
 
-const reset = () => {
-    routerStore.routes.forEach(route => {
-        route.meta.isClick = false;
-        route.children?.forEach(route => {
-            if (route.meta) {
-                route.meta.isClick = false
-            }
-        })
-    });
-}
+//const reset = () => {
+//    routerStore.routes.forEach(route => {
+//        route.meta.isClick = false;
+//        route.children?.forEach(route => {
+//            if (route.meta) {
+//                route.meta.isClick = false
+//            }
+//        })
+//    });
+//}
 //按钮路由跳转使用的是编程式路由跳转
-const handle = (pRoute: RouteRecordNormalized, cRoute?: RouteRecordRaw) => {
-    reset();
-    pRoute.meta.isClick = true;
-    if (cRoute && cRoute.meta) {
-        cRoute.meta.isClick = true
-        routerService.push(cRoute)
-    }
+const handle = (pmenu: IMenu, cmenu?: IMenu) => {
+    //reset();
+    pmenu.isClick = true;
+//    if (cmenu && cmenu.meta) {
+//        cmenu.meta.isClick = true
+//        routerService.push(cmenu)
+//    }
 }
 </script>
+
 
 <style lang="scss" scoped>
 .left-container {

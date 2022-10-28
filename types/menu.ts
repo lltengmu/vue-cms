@@ -1,8 +1,8 @@
 interface Menu {
-    title:string,
+    title?:string,
     icon?:string,
-    isClick:boolean
+    isClick?:boolean
 }
 export interface IMenu extends Menu {
-    children:Menu[]
+    children?:Menu[]
 }

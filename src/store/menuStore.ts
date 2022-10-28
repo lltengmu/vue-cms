@@ -1,22 +1,30 @@
 import { defineStore } from 'pinia'
 import { RouteRecordNormalized, useRouter } from 'vue-router';
-export default defineStore('router', {
+import { IMenu } from '#/menu'
+import routers from '@/router'
+export default defineStore('menu', {
     state: () => {
         return {
-            menus: IMenu,
+            menus: [] as IMenu[],
         }
     },
     actions: {
-        getMenuByRoute() {
-            const routers = useRouter()
-            const routes = routers.getRoutes()
-                .filter(route => route.children.length && route.meta.show)
+        init(){
+            this.getMenuByRoute();
+        },
+        //根据路由获取菜单
+        getMenuByRoute() {         
+            this.menus = routers.getRoutes()
+                .filter(route => route.children.length && route.meta.menu)
                 .map(route => {
-                    route.children = route.children.filter(route => route.meta?.show)
-                    return route;
+                    let menu:IMenu = { ...route.meta.menu }
+                    menu.children = route.children.filter(route => route.meta?.menu)
+                    .map(route => {
+                        return route.meta?.menu
+                    }) as IMenu[];
+                    return menu;
                 })
-                .filter(route => route.children.length)
-            return routes;
+                .filter(menu => menu.children?.length)
         }
     }
 })
