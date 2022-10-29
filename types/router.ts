@@ -13,5 +13,9 @@ declare module 'vue-router' {
     permissons?:string[],
     //定义菜单
     menu?:IMenu,
+    //进入动画类
+    enterClass?:string,
+    //离开动画类
+    leaveClass?:string
   }
 }

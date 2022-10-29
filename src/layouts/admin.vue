@@ -1,13 +1,15 @@
 <template>
-    <div class="admin min-h-screen w-screen flex">
+    <div class="admin h-screen w-screen grid grid-cols-[auto_1fr]">
         <MenuComponent class="hidden md:block" />
-        <div class="content flex-1 bg-gray-100">
-            <navbar />
-            <Historylink />
-            <div class="m-5">
+        <div class="content bg-gray-100 grid grid-rows-[auto_1fr]">
+            <div class>
+                <navbar />
+                <Historylink />
+            </div>
+            <div class="p-3 relative overflow-y-auto overflow-x-hidden">
                 <router-view #default="{ Component }">
-                    <Transition appear enter-active-class="animate__animated animate__bounceInRight">
-                        <component :is="Component" />
+                    <Transition appear class="animate__animated" :enter-active-class="route.meta.enterClass?? 'animate__fadeInRight'" :leave-active-class="route.meta.leaveClass??'animate__fadeOutLeft'">
+                        <component :is="Component" class="absolute w-full" />
                     </Transition>
                 </router-view>
             </div>
@@ -21,7 +23,7 @@ import Navbar from './admin/navbar.vue'
 import Historylink from './admin/historylink.vue';
 import menuStore from '@/store/menuStore';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';
-const menu = menuStore()
+const menu = menuStore() 
 const route = useRoute()
 menu.init();
 onBeforeRouteUpdate(() => {
@@ -30,7 +32,12 @@ onBeforeRouteUpdate(() => {
 </script>
 
 <style lang="scss" scoped>
-
+.animate__fadeInRight{
+    animation-duration: 0.5s;
+}
+.animate__fadeOutLeft{
+    animation-duration: 0.5s;
+}
 </style> 
 
 
