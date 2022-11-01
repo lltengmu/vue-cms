@@ -1,12 +1,12 @@
 <template>
-    <div class="admin h-screen w-screen grid grid-cols-[auto_1fr]">
-        <MenuComponent class="hidden md:block" />
+    <div class="admin h-screen w-screen grid md:grid-cols-[auto_1fr]">
+        <MenuComponent />
         <div class="content bg-gray-100 grid grid-rows-[auto_1fr]">
             <div class>
                 <navbar />
                 <Historylink />
             </div>
-            <div class="p-3 relative overflow-y-auto overflow-x-hidden">
+            <div class="m-3 relative overflow-y-auto overflow-x-hidden">
                 <router-view #default="{ Component }">
                     <Transition appear class="animate__animated" :enter-active-class="route.meta.enterClass?? 'animate__fadeInRight'" :leave-active-class="route.meta.leaveClass??'animate__fadeOutLeft'">
                         <component :is="Component" class="absolute w-full" />
@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import MenuComponent from './admin/menu.vue'
-import Navbar from './admin/navbar.vue'
+import navbar from './admin/navbar.vue'
 import Historylink from './admin/historylink.vue';
 import menuStore from '@/store/menuStore';
 import { onBeforeRouteUpdate, useRoute } from 'vue-router';

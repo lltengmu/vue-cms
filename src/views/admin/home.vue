@@ -1,5 +1,6 @@
 <template>
-    <div class="grid md:grid-cols-4 gap-3 bg-gray-100">
+    <div>
+        <div class="grid md:grid-cols-4 gap-3 bg-gray-100">
         <el-card shadow="hover" :body-style="{ padding: '20px' }" v-for="(card,index) of cards" :key="index"
             class="cursor-pointer">
             <template #header>
@@ -35,6 +36,7 @@
             </template>
             <div id="echart2" class="h-72 w-full"></div>
         </el-card>
+    </div>
     </div>
 </template>
 

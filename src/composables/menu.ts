@@ -9,14 +9,19 @@ import { forEach } from "lodash";
 class Menu {
     public menu = ref<IMenu[]>([])
     public history = ref<IMenu[]>([])
+    public close = ref(false)
     constructor() {
         this.menu.value = this.getMenuByRoute()
         this.history.value = utils.store.get(CacheEnum.HISTORY_MENU) as unknown as IMenu[] ?? []
+    }
+    toggleState(){
+        this.close.value = !this.close.value
     }
     setCurrentMenu(route:RouteLocationNormalized){
         this.menu.value.forEach((item) => {
             item.isClick = false
             item.children?.forEach((cmenu) => {
+                cmenu.isClick = false;
                 if(cmenu.route == route.name){
                     item.isClick = true
                     cmenu.isClick = true

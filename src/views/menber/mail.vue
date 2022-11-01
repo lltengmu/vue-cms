@@ -1,5 +1,7 @@
 <template>
-    menber/mail
+    <div>
+        menber/mail
+    </div>
 </template>
 
 <script setup lang="ts">
